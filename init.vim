@@ -21,23 +21,29 @@ set ttyfast                 " Speed up scrolling in Vim
 set spell                 " enable spell check (may need to download language package)
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
+
 call plug#begin()
 
+ "Plug 'nvimdev/dashboard-nvim'
  Plug 'dracula/vim'
+ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
  Plug 'ryanoasis/vim-devicons'
  Plug 'SirVer/ultisnips'
  Plug 'honza/vim-snippets'
  Plug 'scrooloose/nerdtree'
  Plug 'preservim/nerdcommenter'
- Plug 'mhinz/vim-startify'
- Plug 'https://github.com/neoclide/coc.nvim'
+" Plug 'mhinz/vim-startify'
+Plug 'https://github.com/neoclide/coc.nvim'
  Plug 'nvim-lua/plenary.nvim'
- Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+ Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
  Plug 'ThePrimeagen/harpoon', {'branch' :'harpoon2'}
  Plug 'github/copilot.vim'
  Plug 'mfussenegger/nvim-dap'
  Plug 'nvim-neotest/nvim-nio'
  Plug 'rcarriga/nvim-dap-ui'
+ Plug 'w0rp/ale'
+ Plug 'OmniSharp/omnisharp-vim'
+ Plug 'glepnir/dashboard-nvim'
  call plug#end()
 
 "CoC Settings
@@ -88,7 +94,15 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
- 
+
+"OmniSharp Settings
+"let g:OmniSharp_server_use_mono = 1
+"let g:ale_linters = {
+"\ 'cs': ['OmniSharp']
+";\}
+"let g:ale_cs_mcsc_assemblies = [ '/home/technodromo/Unity/Hub/Editor/2022.3.12f1/Editor/Data/Managed/UnityEngine.dll' ]
+"let g:ale_cs_mcsc_assemblies += [ expand(a:path_to_unity_project .'/obj/Debug') ]
+
 "coc-snippets Settings
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
@@ -102,7 +116,7 @@ function! CheckBackspace() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-lua require('keybindings')
 
-"A simple test to see if lua scripting works;
-"lua require('testFunc')
+lua require('keybindings')
+lua require('dashboard-config')
+
